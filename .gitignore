@@ -1,0 +1,10 @@
+
+wag/
+media/
+blog/__pycache__/
+blog/migrations/
+blog/.pytest_cache/
+blog/.coverage      
+home/__pycache__/
+home/migrations/
+home/.pytest_cache/ 
