@@ -20,6 +20,7 @@ from .api import api_router
 # api_router.register_endpoint('images', ImagesAPIEndpoint)
 
 urlpatterns = [
+    path('api/v3/', api_router.urls),
     path('api/v2/', api_router.urls),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
