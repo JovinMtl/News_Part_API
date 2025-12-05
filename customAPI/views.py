@@ -17,7 +17,7 @@ class NewsOps(viewsets.ViewSet):
     """
         Will do custom GET queries on News model.
     """
-    @action(methods=['get'], detail=True)
+    @action(methods=['get'], detail=False)
     def get_pages(self, request):
         """
         should return all pages.
