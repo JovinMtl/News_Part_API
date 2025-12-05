@@ -8,3 +8,6 @@ blog/.coverage
 home/__pycache__/
 home/migrations/
 home/.pytest_cache/ 
+
+newsDrf/__pycache__/
+newsDrf/migrations/
