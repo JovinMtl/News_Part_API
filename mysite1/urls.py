@@ -14,13 +14,15 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 from .api import api_router
 
+# from ..customAPI import urls as customapi_urls   
+
 
 # api_router = WagtailAPIRouter('wagtailapi')
 # api_router.register_endpoint('pages', PagesAPIEndpoint)
 # api_router.register_endpoint('images', ImagesAPIEndpoint)
 
 urlpatterns = [
-    path('api/v3/', api_router.urls),
+    path('api/v3/', include('customAPI.urls')),
     path('api/v2/', api_router.urls),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),

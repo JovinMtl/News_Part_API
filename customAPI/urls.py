@@ -6,7 +6,7 @@ from .views import NewsOps
 
 
 router = DefaultRouter()
-router.register(r'posts', NewsOps, basename='entrants' )
+router.register(r'news', NewsOps, basename='posts' )
 
 urlpatterns = [
     path('', include(router.urls)),
