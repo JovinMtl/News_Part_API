@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NewsdrfConfig(AppConfig):
+class CustomapiConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "newsDrf"
+    name = "customAPI"
