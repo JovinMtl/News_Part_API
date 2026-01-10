@@ -127,7 +127,17 @@ TIME_ZONE = "UTC"
 
 USE_I18N = True
 
+WAGTAIL_I18N_ENABLED = True
+
+USE_L10N = True
+
 USE_TZ = True
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ('en', "English"),
+    ('fr', "French"),
+    ('bi', "Kirundi"),
+]
 
 
 # Static files (CSS, JavaScript, Images)
@@ -198,3 +208,6 @@ WAGTAILDOCS_EXTENSIONS = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+default_image_format = 'AVIF'  # or 'JPEG', 'PNG', etc.
+WAGTAILIMAGES_DEFAULT_FORMAT = default_image_format
