@@ -21,6 +21,8 @@ BASE_DIR = PROJECT_DIR.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 
+DEBUG = False
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -53,7 +55,21 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+# MIDDLEWARE = [
+#     "django.middleware.security.SecurityMiddleware",
+#     "django.contrib.sessions.middleware.SessionMiddleware",
+#     "corsheaders.middleware.CorsMiddleware",
+#     "django.middleware.common.CommonMiddleware",
+#     "django.middleware.csrf.CsrfViewMiddleware",
+#     "django.contrib.auth.middleware.AuthenticationMiddleware",
+#     "django.contrib.messages.middleware.MessageMiddleware",
+#     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+#     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+# ]
+
 MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",
+
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -63,6 +79,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+
+    "django.middleware.cache.FetchFromCacheMiddleware",
+    "news.middleware.PublicAPICacheHeadersMiddleware",
 ]
 
 ROOT_URLCONF = "mysite1.urls"
@@ -216,3 +235,24 @@ WAGTAILIMAGES_DEFAULT_FORMAT = default_image_format
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = True
 
 ALLOWED_HOSTS = ['admin.aapvasbl.org',]
+
+
+# Middleware cache settings
+CACHE_MIDDLEWARE_ALIAS = "default"
+CACHE_MIDDLEWARE_SECONDS = 300  # 5 minutes
+CACHE_MIDDLEWARE_KEY_PREFIX = "wagtail_api"
+
+# Use local memory cache (works without Redis)
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-remote-instance",
+    }
+}
+
+# Cloudflare / public caching headers
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+}
