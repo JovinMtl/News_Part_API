@@ -211,3 +211,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 default_image_format = 'AVIF'  # or 'JPEG', 'PNG', etc.
 WAGTAILIMAGES_DEFAULT_FORMAT = default_image_format
+
+
+WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = True
+
+ALLOWED_HOSTS = ['admin.aapvasbl.org',]
