@@ -115,7 +115,6 @@ class Articles(Page):
     ]
 
     api_fields = [
-        # APIField("titre"),
         APIField("intro"),
         APIField("contenu"),
         APIField(
