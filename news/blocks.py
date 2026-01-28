@@ -33,6 +33,7 @@ class ResponsiveImageBlock(blocks.StructBlock):
 
 
 class NewsBodyBlock(blocks.StreamBlock):
-    heading = blocks.CharBlock(classname="full title", icon="title")
-    paragraph = blocks.RichTextBlock(icon="pilcrow")
+    sous_titre = blocks.CharBlock(classname="full title", icon="title")
+    paragraphe = blocks.RichTextBlock(icon="pilcrow")
     image = ResponsiveImageBlock()
+    citation = blocks.BlockQuoteBlock()
