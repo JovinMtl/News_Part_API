@@ -93,6 +93,7 @@ class Articles(Page):
         blank=True,
         use_json_field=True,
     )
+    date_d_activite = models.DateTimeField(default=timezone.now)
     date_d_edition = models.DateTimeField(default=timezone.now)
     temps_de_lecture = models.IntegerField(verbose_name='Temps ecute (en Minute)', default=5)
     tags = ClusterTaggableManager(
@@ -108,6 +109,7 @@ class Articles(Page):
         FieldPanel("contenu"),
         FieldPanel("auteur"),
         FieldPanel("categorie"),
+        FieldPanel("date_d_activite"),
         FieldPanel("date_d_edition"),
         FieldPanel("temps_de_lecture"),
         FieldPanel("tags"),
@@ -115,16 +117,43 @@ class Articles(Page):
     ]
 
     api_fields = [
+        APIField("title"),
         APIField("intro"),
         APIField("contenu"),
         APIField(
             "image_thumbnail",
             serializer=ImageRenditionField(
-                "width-800|format-avif",
+                "width-400|format-avif|avifquality-70",
                 source="image"
             ),
         ),
+        APIField(
+            "image_400",
+            serializer=ImageRenditionField(
+                "width-480|format-avif|avifquality-70",
+                source="image"
+            ),
+        ),
+        APIField(
+            "image_800",
+            serializer=ImageRenditionField(
+                "width-800|format-avif|avifquality-70",
+                source="image"
+            ),
+        ),
+        APIField(
+            "image_1600",
+            serializer=ImageRenditionField(
+                "width-1600|format-avif|avifquality-75",
+                source="image"
+            ),
+        ),
+        APIField("auteur"),
+        APIField("categorie"),
+        APIField("date_d_activite"),
+        APIField("temps_de_lecture"),
         APIField("tags"),
+        APIField("score"),
     ]
 
     def get_admin_display_title(self):
