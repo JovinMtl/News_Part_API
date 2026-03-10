@@ -13,7 +13,9 @@ from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.snippets.models import register_snippet
 
-from .blocks import NewsBodyBlock
+from .blocks import NewsBodyBlock, ResponsiveImageBlock, ResponsiveProfileBlock
+from wagtail import blocks
+from wagtail.images.blocks import ImageBlock
 
 class NewsPage(Page):
     image = models.ForeignKey(
@@ -158,3 +160,34 @@ class Articles(Page):
 
     def get_admin_display_title(self):
         return f"{str(self.date_d_edition)[:10]} · {self.title}"
+
+
+
+class PageEquide(Page):
+    intro = models.CharField(max_length=250)
+
+    membres = StreamField([
+    ('personne', blocks.StructBlock([
+        ('nom', blocks.CharBlock()),
+        ('prenom', blocks.CharBlock()),
+        ('photo', ResponsiveProfileBlock()),
+        ('role', blocks.CharBlock(required=False)),
+        ('detail', blocks.CharBlock(required=False)),
+        ('biographie', blocks.RichTextBlock(required=False)),
+        ('email', blocks.CharBlock(required=False)),
+        ('tel', blocks.CharBlock(required=False)),
+    ], icon='user')),
+    # ('heading', blocks.CharBlock(form_classname="title")),
+    # ('paragraph', blocks.RichTextBlock()),
+    # ('image', ImageBlock()),
+])
+
+    content_panels = Page.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("membres"),
+    ]
+
+    api_fields = [
+        APIField("intro"),
+        APIField("membres"),
+    ]
