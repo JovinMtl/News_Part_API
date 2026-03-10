@@ -163,7 +163,7 @@ class Articles(Page):
 
 
 
-class PageEquide(Page):
+class PageEquipe(Page):
     intro = models.CharField(max_length=250)
 
     membres = StreamField([
